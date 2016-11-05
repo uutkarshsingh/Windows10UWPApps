@@ -25,6 +25,19 @@ namespace Windows10App
         public MainPage()
         {
             this.InitializeComponent();
+            progress.IsActive = true;
         }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("The value for the slider is changing");
+            dsa.Text = e.NewValue.ToString();
+            Slider slider = sender as Slider;
+            Panel parentPanel = slider.Parent as Panel;
+            int childIndex = parentPanel.Children.IndexOf(slider);
+            TextBlock txtblk = parentPanel.Children[childIndex + 1] as TextBlock;
+            txtblk.Text = (e.NewValue * 5).ToString();
+        }
+
     }
 }
